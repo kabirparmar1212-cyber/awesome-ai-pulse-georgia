@@ -1,0 +1,2341 @@
+<!doctype html>
+<html lang="ka">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Pulse Georgia — საუკეთესო AI ხელსაწყოების კოლექცია</title>
+    <meta
+      name="description"
+      content="404 ხელით შერჩეული AI და Claude Code რეპოზიტორია 21 კატეგორიაში, ქართული აღწერებით. ცოცხალი GitHub სტარები, ძებნა, MCP server და aipulse CLI."
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta
+      property="og:title"
+      content="AI Pulse Georgia — AI ხელსაწყოების კოლექცია"
+    />
+    <meta
+      property="og:description"
+      content="404 ხელით შერჩეული AI რეპოზიტორია 21 კატეგორიაში, ქართული აღწერებით — MCP server და CLI-ით."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+Georgian:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/lenis@1.3.11/dist/lenis.css"
+    />
+    <script>
+      // Enable animation hiding only when motion is allowed AND JS runs (else content stays visible).
+      try {
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches)
+          document.documentElement.classList.add("anim");
+      } catch (e) {}
+    </script>
+    <style>
+      :root {
+        --bg: #05060c;
+        --bg2: #0a0c16;
+        --text: #eaecf6;
+        --muted: #a4acc2;
+        --faint: #6c7488;
+        --border: rgba(255, 255, 255, 0.08);
+        --border2: rgba(255, 255, 255, 0.15);
+        --panel: rgba(255, 255, 255, 0.025);
+        --panel2: rgba(255, 255, 255, 0.045);
+        --accent: #00d0ff;
+        --accent2: #7c8cff;
+        --accent3: #c084fc;
+        --radius: 18px;
+        --maxw: 1180px;
+        --nav-h: 62px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          "Noto Sans Georgian",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        line-height: 1.62;
+        overflow-x: hidden;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .mono {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-variant-numeric: tabular-nums;
+      }
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0 22px;
+      }
+      section {
+        position: relative;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 7px 15px;
+        border: 1px solid var(--border2);
+        border-radius: 999px;
+        background: var(--panel);
+        font-size: 13px;
+        color: var(--muted);
+        backdrop-filter: blur(6px);
+      }
+      .eyebrow .lv {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #34d399;
+        box-shadow: 0 0 10px #34d399;
+        animation: blink 2.6s ease-in-out infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0.4;
+        }
+      }
+      .sec-head {
+        text-align: center;
+        max-width: 680px;
+        margin: 0 auto 46px;
+      }
+      .sec-head h2 {
+        font-size: clamp(27px, 4.4vw, 42px);
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        margin: 18px 0 12px;
+        line-height: 1.12;
+      }
+      .sec-head p {
+        color: var(--muted);
+        font-size: 16px;
+        margin: 0;
+      }
+
+      /* progress */
+      .progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 100%;
+        transform: scaleX(0);
+        transform-origin: left;
+        z-index: 80;
+        background: linear-gradient(
+          90deg,
+          var(--accent),
+          var(--accent2),
+          var(--accent3)
+        );
+        will-change: transform;
+      }
+
+      /* animated background */
+      .bg-fx {
+        position: fixed;
+        inset: 0;
+        z-index: -3;
+        overflow: hidden;
+        background: var(--bg);
+        pointer-events: none;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(110px);
+        mix-blend-mode: screen;
+        opacity: 0.55;
+        will-change: transform;
+      }
+      .b1 {
+        width: 52vmax;
+        height: 52vmax;
+        background: radial-gradient(circle, #0a84ff, transparent 60%);
+        top: -12%;
+        left: -6%;
+      }
+      .b2 {
+        width: 46vmax;
+        height: 46vmax;
+        background: radial-gradient(circle, #9b4bff, transparent 60%);
+        bottom: -16%;
+        right: -8%;
+      }
+      .b3 {
+        width: 40vmax;
+        height: 40vmax;
+        background: radial-gradient(circle, #13d6c4, transparent 62%);
+        top: 34%;
+        left: 42%;
+      }
+      .anim .b1 {
+        animation: drift1 34s ease-in-out infinite alternate;
+      }
+      .anim .b2 {
+        animation: drift2 40s ease-in-out infinite alternate;
+      }
+      .anim .b3 {
+        animation: drift1 28s ease-in-out infinite alternate-reverse;
+      }
+      @keyframes drift1 {
+        from {
+          transform: translate(0, 0) scale(1);
+        }
+        to {
+          transform: translate(12vw, 9vh) scale(1.25);
+        }
+      }
+      @keyframes drift2 {
+        from {
+          transform: translate(0, 0) scale(1.1);
+        }
+        to {
+          transform: translate(-11vw, -7vh) scale(0.85);
+        }
+      }
+      #stars {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+        opacity: 0.7;
+      }
+      .grain {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0.05;
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      .cursor-glow {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 560px;
+        height: 560px;
+        margin: -280px 0 0 -280px;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0;
+        transition: opacity 0.4s;
+        will-change: transform;
+        mix-blend-mode: screen;
+        background: radial-gradient(
+          circle,
+          rgba(0, 208, 255, 0.13),
+          rgba(124, 140, 255, 0.08) 40%,
+          transparent 68%
+        );
+      }
+      .vignette {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background: radial-gradient(
+          120vw 100vh at 50% 24%,
+          transparent 55%,
+          rgba(0, 0, 0, 0.5) 100%
+        );
+      }
+
+      /* nav */
+      nav {
+        position: fixed;
+        top: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 26px);
+        max-width: var(--maxw);
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 10px 16px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: rgba(8, 10, 18, 0.62);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+        font-size: 15px;
+      }
+      .brand .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 12px 2px var(--accent);
+        animation: blink 3s ease-in-out infinite;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .nav-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 12px;
+        border-radius: 10px;
+        font-size: 13.5px;
+        color: var(--muted);
+        border: 1px solid transparent;
+        transition:
+          color 0.2s,
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+        background: var(--panel);
+        border-color: var(--border);
+      }
+      .nav-links a.primary {
+        color: #05070e;
+        background: var(--accent);
+        font-weight: 700;
+      }
+      .nav-links a.primary:hover {
+        background: #5fe0ff;
+      }
+      .nav-links svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* hero */
+      header.hero {
+        text-align: center;
+        padding: 148px 22px 40px;
+        overflow: visible;
+      }
+      h1 {
+        font-size: clamp(40px, 7.6vw, 80px);
+        line-height: 1.3;
+        margin: 24px 0 18px;
+        padding-bottom: 0.12em;
+        font-weight: 900;
+        letter-spacing: -0.025em;
+      }
+      .grad-text {
+        background: linear-gradient(
+          100deg,
+          #fff 6%,
+          var(--accent) 46%,
+          var(--accent3) 92%
+        );
+        background-size: 220% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        text-shadow: 0 0 46px rgba(0, 208, 255, 0.18);
+      }
+      .anim .grad-text {
+        animation: grad 7s linear infinite;
+      }
+      /* When a gradient headline is word-split, the gradient must live on the
+         transformed inner spans (background-clip:text doesn't reach transformed
+         children of the parent). Each word gets its own gradient fill. */
+      [data-split].grad-text .word-wrap > span {
+        background: linear-gradient(
+          100deg,
+          #fff 6%,
+          var(--accent) 46%,
+          var(--accent3) 92%
+        );
+        background-size: 220% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+      }
+      .anim [data-split].grad-text .word-wrap > span {
+        animation: grad 7s linear infinite;
+      }
+      @keyframes grad {
+        to {
+          background-position: 220% center;
+        }
+      }
+      .lead {
+        max-width: 640px;
+        margin: 0 auto 32px;
+        font-size: clamp(16px, 2.2vw, 19px);
+        color: var(--muted);
+      }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 13px;
+        justify-content: center;
+        margin-bottom: 44px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 14px 24px;
+        border-radius: 13px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s;
+        will-change: transform;
+      }
+      .btn svg {
+        width: 18px;
+        height: 18px;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #05070e;
+        box-shadow: 0 16px 44px -14px rgba(0, 208, 255, 0.6);
+      }
+      .btn-primary:hover {
+        background: #5fe0ff;
+      }
+      .btn-ghost {
+        background: var(--panel2);
+        color: var(--text);
+        border-color: var(--border2);
+      }
+      .btn-ghost:hover {
+        border-color: var(--accent);
+        color: #fff;
+      }
+      .stats {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 13px;
+      }
+      .stat {
+        min-width: 148px;
+        padding: 18px 22px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.045),
+          rgba(255, 255, 255, 0.01)
+        );
+      }
+      .stat .num {
+        font-size: 29px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        background: linear-gradient(120deg, #fff, var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .stat .lbl {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 3px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      /* kinetic word reveal */
+      /* No clipping mask — words blur+rise in, so Georgian ascenders/descenders
+         can never be cut off. */
+      .word-wrap {
+        display: inline-block;
+        vertical-align: top;
+      }
+      .word-wrap > span {
+        display: inline-block;
+        will-change: transform, opacity, filter;
+      }
+      .anim [data-split] .word-wrap > span {
+        opacity: 0;
+        transform: translateY(0.45em);
+        filter: blur(12px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+          filter 0.7s ease;
+        transition-delay: calc(var(--i, 0) * 60ms);
+      }
+      .anim [data-split].in .word-wrap > span {
+        opacity: 1;
+        transform: none;
+        filter: blur(0);
+      }
+
+      /* marquee */
+      .marquee {
+        position: relative;
+        margin: 6px 0 4px;
+        padding: 14px 0;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(
+          90deg,
+          transparent,
+          #000 8%,
+          #000 92%,
+          transparent
+        );
+        mask-image: linear-gradient(
+          90deg,
+          transparent,
+          #000 8%,
+          #000 92%,
+          transparent
+        );
+      }
+      .marquee__track {
+        display: inline-flex;
+        gap: 30px;
+        white-space: nowrap;
+        will-change: transform;
+      }
+      .anim .marquee__track {
+        animation: scroll 36s linear infinite;
+      }
+      .marquee:hover .marquee__track {
+        animation-play-state: paused;
+      }
+      @keyframes scroll {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      .mq-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .mq-item .s {
+        color: #ffd66b;
+        font-size: 12.5px;
+      }
+      .mq-item .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent);
+        opacity: 0.6;
+      }
+
+      /* features (bento + tilt) */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+      }
+      .feat {
+        position: relative;
+        padding: 26px 22px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--panel);
+        overflow: hidden;
+        transition:
+          border-color 0.25s,
+          background 0.25s;
+        will-change: transform;
+        transform-style: preserve-3d;
+      }
+      .feat::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+        background: radial-gradient(
+          240px circle at var(--mx, 50%) var(--my, 50%),
+          rgba(0, 208, 255, 0.12),
+          transparent 60%
+        );
+      }
+      .feat:hover {
+        border-color: var(--border2);
+        background: var(--panel2);
+      }
+      .feat:hover::before {
+        opacity: 1;
+      }
+      .feat .ic {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 16px;
+        background: rgba(0, 208, 255, 0.1);
+        border: 1px solid rgba(0, 208, 255, 0.25);
+      }
+      .feat .ic svg {
+        width: 23px;
+        height: 23px;
+        color: var(--accent);
+      }
+      .feat h3 {
+        margin: 0 0 7px;
+        font-size: 17.5px;
+        font-weight: 700;
+      }
+      .feat p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14.5px;
+      }
+
+      /* terminal */
+      .use-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 1fr;
+        gap: 18px;
+        align-items: start;
+      }
+      .term {
+        border: 1px solid var(--border2);
+        border-radius: 16px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #0b0e18, #080a12);
+        box-shadow: 0 30px 80px -36px rgba(0, 0, 0, 0.8);
+      }
+      .term-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 15px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .term-bar .d {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+      }
+      .term-bar .t {
+        margin-left: 8px;
+        font-size: 12.5px;
+        color: var(--faint);
+      }
+      .term-body {
+        padding: 18px;
+        font-size: 13px;
+        line-height: 1.85;
+        overflow-x: auto;
+      }
+      .term-body .cmt {
+        color: var(--faint);
+      }
+      .term-body .pr {
+        color: var(--accent);
+      }
+      .term-body .st {
+        color: #ffd66b;
+      }
+      .term-body pre {
+        margin: 0;
+        white-space: pre;
+        font-family: "JetBrains Mono", monospace;
+        color: #cfe6ff;
+      }
+      .copy {
+        position: absolute;
+        top: 11px;
+        right: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 11px;
+        border-radius: 8px;
+        border: 1px solid var(--border2);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        font-size: 12px;
+        cursor: pointer;
+        font-family: inherit;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .copy:hover {
+        color: var(--text);
+        border-color: var(--accent);
+      }
+      .copy svg {
+        width: 13px;
+        height: 13px;
+      }
+      .term-block {
+        position: relative;
+        margin-bottom: 18px;
+      }
+      .use-note h3 {
+        margin: 0 0 10px;
+        font-size: 19px;
+        font-weight: 800;
+      }
+      .use-note p {
+        color: var(--muted);
+        font-size: 15px;
+        margin: 0 0 14px;
+      }
+      .use-note ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+      }
+      .use-note li {
+        display: flex;
+        gap: 11px;
+        font-size: 14.5px;
+        color: var(--muted);
+      }
+      .use-note li svg {
+        width: 19px;
+        height: 19px;
+        color: var(--accent);
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .use-note b {
+        color: var(--text);
+      }
+
+      /* categories (bento) */
+      .cats {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+        gap: 13px;
+      }
+      .cat-tile {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: var(--panel);
+        cursor: pointer;
+        overflow: hidden;
+        transition:
+          border-color 0.22s,
+          background 0.22s;
+        will-change: transform;
+      }
+      .cat-tile::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+        background: radial-gradient(
+          200px circle at var(--mx, 50%) var(--my, 50%),
+          color-mix(in srgb, var(--cc) 18%, transparent),
+          transparent 60%
+        );
+      }
+      .cat-tile:hover {
+        background: var(--panel2);
+        border-color: color-mix(in srgb, var(--cc) 55%, transparent);
+      }
+      .cat-tile:hover::before {
+        opacity: 1;
+      }
+      .cat-tile:focus-visible {
+        outline: 2px solid var(--cc);
+        outline-offset: 2px;
+      }
+      .cat-ic {
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+        display: grid;
+        place-items: center;
+        font-size: 20px;
+        flex-shrink: 0;
+        background: color-mix(in srgb, var(--cc) 16%, transparent);
+        border: 1px solid color-mix(in srgb, var(--cc) 35%, transparent);
+      }
+      .cat-tile .nm {
+        font-size: 14.5px;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .cat-tile .ct {
+        font-size: 12px;
+        color: var(--faint);
+        margin-top: 1px;
+      }
+      .cat-tile .ct b {
+        color: var(--cc);
+      }
+
+      /* top repos (tilt) */
+      .tops {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 14px;
+      }
+      .top-card {
+        position: relative;
+        display: flex;
+        gap: 15px;
+        align-items: flex-start;
+        padding: 18px;
+        border: 1px solid var(--border);
+        border-radius: 15px;
+        background: var(--panel);
+        cursor: pointer;
+        overflow: hidden;
+        transition:
+          border-color 0.22s,
+          background 0.22s;
+        will-change: transform;
+        transform-style: preserve-3d;
+      }
+      .top-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+        background: radial-gradient(
+          260px circle at var(--mx, 50%) var(--my, 50%),
+          rgba(255, 255, 255, 0.08),
+          transparent 45%
+        );
+      }
+      .top-card:hover {
+        background: var(--panel2);
+        border-color: color-mix(in srgb, var(--cc) 50%, transparent);
+      }
+      .top-card:hover::after {
+        opacity: 1;
+      }
+      .rank {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 1;
+        color: transparent;
+        background: linear-gradient(160deg, #fff, var(--cc));
+        -webkit-background-clip: text;
+        background-clip: text;
+        flex-shrink: 0;
+        width: 42px;
+      }
+      .top-card .nm {
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .top-card .meta {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-top: 5px;
+        font-size: 12.5px;
+        color: var(--faint);
+      }
+      .top-card .meta .st {
+        color: #ffd66b;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .top-card .meta .st svg {
+        width: 12px;
+        height: 12px;
+      }
+      .top-card .meta .cdot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--cc);
+      }
+
+      /* collection */
+      .controls {
+        position: sticky;
+        top: calc(var(--nav-h) + 8px);
+        z-index: 40;
+        padding: 14px 0 6px;
+        background: linear-gradient(
+          180deg,
+          rgba(5, 6, 12, 0.94),
+          rgba(5, 6, 12, 0.55)
+        );
+      }
+      .search {
+        position: relative;
+        max-width: 540px;
+        margin: 0 auto 15px;
+      }
+      .search svg {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        color: var(--faint);
+      }
+      .search input {
+        width: 100%;
+        padding: 13px 16px 13px 46px;
+        border-radius: 12px;
+        border: 1px solid var(--border2);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        font-size: 15px;
+        font-family: inherit;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .search input::placeholder {
+        color: var(--faint);
+      }
+      .search input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(0, 208, 255, 0.14);
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 13px;
+        border-radius: 999px;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        background: var(--panel);
+        color: var(--muted);
+        font-size: 13px;
+        font-family: inherit;
+        transition:
+          color 0.2s,
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .chip:hover {
+        color: var(--text);
+        border-color: var(--border2);
+      }
+      .chip .ct {
+        font-size: 11px;
+        color: var(--faint);
+      }
+      .chip[aria-pressed="true"] {
+        color: #05070e;
+        font-weight: 700;
+        background: var(--cc, #fff);
+        border-color: transparent;
+      }
+      .chip[aria-pressed="true"] .ct {
+        color: rgba(5, 7, 14, 0.6);
+      }
+      .chip .sw {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--cc, #fff);
+      }
+      .chip[aria-pressed="true"] .sw {
+        display: none;
+      }
+      .count-line {
+        color: var(--faint);
+        font-size: 13px;
+        text-align: center;
+        margin: 8px 0 18px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 15px;
+      }
+      .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 19px 19px 17px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--panel);
+        overflow: hidden;
+        transition:
+          transform 0.24s,
+          border-color 0.24s,
+          background 0.24s;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--cc, #fff);
+        opacity: 0.5;
+        transition:
+          opacity 0.24s,
+          box-shadow 0.24s;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: color-mix(in srgb, var(--cc, #fff) 50%, transparent);
+        background: var(--panel2);
+      }
+      .card:hover::before {
+        opacity: 1;
+        box-shadow: 0 0 16px 1px var(--cc, #fff);
+      }
+      .card .top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .card h3 {
+        margin: 0;
+        font-size: 16.5px;
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: -0.01em;
+      }
+      .card h3 a {
+        color: inherit;
+      }
+      .card h3 a:hover {
+        color: #fff;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .stbadge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        flex-shrink: 0;
+        padding: 4px 9px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border);
+        font-size: 12px;
+        color: #ffd66b;
+      }
+      .stbadge svg {
+        width: 13px;
+        height: 13px;
+      }
+      .cat-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11.5px;
+        color: var(--cc, #fff);
+        font-weight: 600;
+      }
+      .cat-tag .sw {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--cc, #fff);
+        box-shadow: 0 0 8px var(--cc, #fff);
+      }
+      .card p {
+        margin: 0;
+        font-size: 13.5px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .card p.clamp {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .card p code {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.86em;
+        background: rgba(255, 255, 255, 0.07);
+        padding: 1px 5px;
+        border-radius: 5px;
+        color: #cfe6ff;
+      }
+      .card .more {
+        align-self: flex-start;
+        background: none;
+        border: none;
+        padding: 0;
+        margin: -2px 0 0;
+        color: var(--cc, #fff);
+        font-family: inherit;
+        font-size: 12.5px;
+        font-weight: 600;
+        cursor: pointer;
+        opacity: 0.85;
+        transition: opacity 0.2s;
+      }
+      .card .more:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
+      .card .go {
+        margin-top: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--faint);
+        transition: color 0.2s;
+      }
+      .card:hover .go {
+        color: var(--cc, #fff);
+      }
+      .card .go svg {
+        width: 13px;
+        height: 13px;
+      }
+      .empty {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--muted);
+      }
+
+      .cta-band {
+        margin: 20px auto 0;
+        max-width: var(--maxw);
+        text-align: center;
+        padding: 54px 28px;
+        border: 1px solid var(--border2);
+        border-radius: 24px;
+        background:
+          radial-gradient(
+            80% 140% at 50% 0%,
+            rgba(0, 208, 255, 0.16),
+            transparent 70%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.04),
+            rgba(255, 255, 255, 0.01)
+          );
+      }
+      .cta-band h2 {
+        font-size: clamp(26px, 4vw, 38px);
+        font-weight: 900;
+        margin: 0 0 12px;
+        letter-spacing: -0.02em;
+      }
+      .cta-band p {
+        color: var(--muted);
+        margin: 0 auto 26px;
+        max-width: 520px;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        margin-top: 70px;
+        padding: 42px 0 60px;
+      }
+      .foot {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 26px;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      .foot h4 {
+        margin: 0 0 7px;
+        font-size: 16px;
+        font-weight: 900;
+      }
+      .foot p {
+        margin: 0;
+        color: var(--faint);
+        font-size: 13px;
+        max-width: 430px;
+      }
+      .foot-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .foot-links a {
+        padding: 9px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--panel);
+        color: var(--muted);
+        font-size: 13px;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .foot-links a:hover {
+        color: var(--text);
+        border-color: var(--border2);
+      }
+      .gen {
+        color: var(--faint);
+        font-size: 12px;
+        margin-top: 22px;
+        text-align: center;
+      }
+
+      .pad {
+        padding: 80px 0;
+      }
+      /* reveal — only hides when .anim present (JS+motion). Otherwise content is visible. */
+      .anim .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+      }
+
+      @media (max-width: 820px) {
+        .use-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 600px) {
+        header.hero {
+          padding: 120px 18px 30px;
+        }
+        .pad {
+          padding: 54px 0;
+        }
+        .stat {
+          min-width: 120px;
+          padding: 14px 16px;
+        }
+        .stat .num {
+          font-size: 24px;
+        }
+        .nav-links a:not(.primary) {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+          scroll-behavior: auto !important;
+        }
+        .anim .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress" aria-hidden="true"></div>
+    <div class="bg-fx" aria-hidden="true">
+      <span class="blob b1"></span><span class="blob b2"></span
+      ><span class="blob b3"></span>
+    </div>
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <nav>
+      <a class="brand" href="#top"
+        ><span class="dot"></span>AI&nbsp;PULSE&nbsp;GEORGIA</a
+      >
+      <div class="nav-links">
+        <a href="#use">გამოყენება</a>
+        <a href="#categories">კატეგორიები</a>
+        <a href="#collection">კოლექცია</a>
+        <a
+          class="primary magnetic"
+          href="https://github.com/tornikebolokadze1-cyber/awesome-ai-pulse-georgia"
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.59.69.49A10.04 10.04 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"
+            />
+          </svg>
+          Star
+        </a>
+      </div>
+    </nav>
+
+    <a id="top"></a>
+    <header class="hero">
+      <span class="eyebrow" data-enter
+        ><span class="lv"></span>ცოცხალი GitHub სტარები · ქართული აღწერები ·
+        ყოველკვირეული განახლება</span
+      >
+      <h1>
+        <span data-split class="grad-text"
+          >საუკეთესო AI ხელსაწყოები ერთ ქართულ კოლექციაში</span
+        >
+      </h1>
+      <p class="lead" data-enter>
+        404 ხელით შერჩეული AI და Claude Code რეპოზიტორია — coding აგენტებიდან
+        MCP-მდე, ფრეიმვორკებიდან მედია-გენერაციამდე. ყველა ქართულად ახსნილი,
+        საძიებო, და პირდაპირ შენი AI ასისტენტიდან ხელმისაწვდომი.
+      </p>
+      <div class="cta-row" data-enter>
+        <a class="btn btn-primary magnetic" href="#collection"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M4 6h16M4 12h16M4 18h10" /></svg
+          >კოლექციის ნახვა</a
+        >
+        <a class="btn btn-ghost magnetic" href="#use"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="m8 9 3 3-3 3M13 15h3" />
+            <rect x="3" y="4" width="18" height="16" rx="2" /></svg
+          >როგორ მუშაობს</a
+        >
+      </div>
+      <div class="stats" data-enter>
+        <div class="stat">
+          <div class="num mono" data-count="0">0</div>
+          <div class="lbl">რეპოზიტორია</div>
+        </div>
+        <div class="stat">
+          <div class="num mono" data-count="1">0</div>
+          <div class="lbl">კატეგორია</div>
+        </div>
+        <div class="stat">
+          <div class="num mono" id="starStat">0</div>
+          <div class="lbl">ვარსკვლავი ჯამში</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="wrap">
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track" id="marquee"></div>
+      </div>
+    </div>
+
+    <section class="pad">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">რატომ ეს კოლექცია</span>
+          <h2 data-split>ერთი ადგილი მთელი AI ეკოსისტემისთვის</h2>
+          <p>
+            ასობით რეპოს შორის ნავიგაცია რთულია. ეს კოლექცია ხელით შერჩეულ
+            საუკეთესოებს გაძლევს — ქართულად ახსნილს და ყოველთვის ფრესს.
+          </p>
+        </div>
+        <div class="features">
+          <div class="feat reveal tilt">
+            <div class="ic">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m9 11 3 3 8-8" />
+                <path
+                  d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                />
+              </svg>
+            </div>
+            <h3>ხელით შერჩეული</h3>
+            <p>
+              404 რეპო 21 კატეგორიაში — შემთხვევითი სია კი არა, ნამდვილად
+              ღირებული ხელსაწყოები.
+            </p>
+          </div>
+          <div class="feat reveal tilt">
+            <div class="ic">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M3 5h18M3 12h18M3 19h18" />
+              </svg>
+            </div>
+            <h3>ქართულად ახსნილი</h3>
+            <p>
+              თითო რეპოს აქვს ნათელი ქართული აღწერა — რა არის, რისთვის და რით
+              გამოირჩევა.
+            </p>
+          </div>
+          <div class="feat reveal tilt">
+            <div class="ic">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M4 4v6h6M20 20v-6h-6" />
+                <path d="M20 9A8 8 0 0 0 6 6L4 8M4 15a8 8 0 0 0 14 3l2-2" />
+              </svg>
+            </div>
+            <h3>ავტომატურად ფრესი</h3>
+            <p>
+              სტარები ყოველკვირე ავტომატურად სინქრონდება GitHub-თან — რიცხვები
+              არასდროს ძველდება.
+            </p>
+          </div>
+          <div class="feat reveal tilt">
+            <div class="ic">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m8 9 3 3-3 3M13 15h3" />
+                <rect x="3" y="4" width="18" height="16" rx="2" />
+              </svg>
+            </div>
+            <h3>AI-დან ხელმისაწვდომი</h3>
+            <p>
+              MCP server და CLI — ჰკითხე კოლექციას პირდაპირ Claude Code-ში,
+              Cursor-ში ან ტერმინალში.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pad" id="use">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">MCP server &amp; CLI</span>
+          <h2 data-split>ჰკითხე კოლექციას შენი AI ასისტენტიდან</h2>
+          <p>
+            აღარ გჭირდება GitHub-ის გადაქოქვა. დააკავშირე MCP server და AI
+            პირდაპირ ამ კოლექციიდან მოგიძებნის — ან გამოიყენე
+            <span class="mono">aipulse</span> CLI ტერმინალში.
+          </p>
+        </div>
+        <div class="use-grid">
+          <div class="reveal">
+            <div class="term-block">
+              <div class="term">
+                <div class="term-bar">
+                  <span class="d" style="background: #ff5f57"></span
+                  ><span class="d" style="background: #febc2e"></span
+                  ><span class="d" style="background: #28c840"></span
+                  ><span class="t">~/.config — MCP (Claude Code · Cursor)</span>
+                </div>
+                <div class="term-body">
+                  <pre id="snip-mcp">
+{
+  "mcpServers": {
+    "aipulsegeorgia": {
+      "command": "npx",
+      "args": ["-y", "@aipulsegeorgia/mcp-server"]
+    }
+  }
+}</pre>
+                </div>
+              </div>
+              <button class="copy" data-copy="snip-mcp">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="9" y="9" width="11" height="11" rx="2" />
+                  <path d="M5 15V5a2 2 0 0 1 2-2h10" /></svg
+                >კოპირება
+              </button>
+            </div>
+            <div class="term-block">
+              <div class="term">
+                <div class="term-bar">
+                  <span class="d" style="background: #ff5f57"></span
+                  ><span class="d" style="background: #febc2e"></span
+                  ><span class="d" style="background: #28c840"></span
+                  ><span class="t">terminal — aipulse CLI</span>
+                </div>
+                <div class="term-body">
+                  <pre
+                    id="snip-cli"
+                  ><span class="cmt"># npx-ით, ინსტალაციის გარეშე</span>
+<span class="pr">$</span> npx -p @aipulsegeorgia/mcp-server aipulse search <span class="st">"rag memory"</span>
+<span class="pr">$</span> aipulse list --category coding --limit 10
+<span class="pr">$</span> aipulse get aider
+<span class="pr">$</span> aipulse stats</pre>
+                </div>
+              </div>
+              <button class="copy" data-copy="snip-cli">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="9" y="9" width="11" height="11" rx="2" />
+                  <path d="M5 15V5a2 2 0 0 1 2-2h10" /></svg
+                >კოპირება
+              </button>
+            </div>
+          </div>
+          <div class="use-note reveal">
+            <h3>5 ხელსაწყო პირდაპირ AI-ში</h3>
+            <p>
+              დაამატე კონფიგი, გადატვირთე კლიენტი — და
+              <span class="mono">aipulsegeorgia</span> namespace-ში გამოჩნდება
+              ხელსაწყოები:
+            </p>
+            <ul>
+              <li>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="m9 11 3 3L22 4" /></svg
+                ><span
+                  ><b>search_repos</b> — ბუნებრივი ენით ძებნა (ქართულად ან
+                  ინგლისურად).</span
+                >
+              </li>
+              <li>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="m9 11 3 3L22 4" /></svg
+                ><span
+                  ><b>list_repos · list_categories</b> — კატეგორიით
+                  დათვალიერება.</span
+                >
+              </li>
+              <li>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="m9 11 3 3L22 4" /></svg
+                ><span
+                  ><b>get_repo · stats</b> — კონკრეტული რეპო ან მთლიანი
+                  სტატისტიკა.</span
+                >
+              </li>
+              <li>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="m9 11 3 3L22 4" /></svg
+                ><span
+                  >მუშაობს <b>Claude Code, Cursor, Codex, Claude.ai</b>-სა და
+                  ნებისმიერ MCP კლიენტთან.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pad" id="categories">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">21 კატეგორია</span>
+          <h2 data-split>დაათვალიერე მიმართულებების მიხედვით</h2>
+          <p>დააწკაპუნე კატეგორიას და პირდაპირ მის რეპოებზე გადახვალ.</p>
+        </div>
+        <div class="cats" id="catGrid"></div>
+      </div>
+    </section>
+
+    <section class="pad">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">ყველაზე პოპულარული</span>
+          <h2 data-split>კოლექციის მწვერვალი</h2>
+          <p>
+            ყველაზე მეტი ვარსკვლავის მქონე რეპოები — სტარები ცოცხალი GitHub
+            მონაცემებიდან.
+          </p>
+        </div>
+        <div class="tops" id="topGrid"></div>
+      </div>
+    </section>
+
+    <section class="pad" id="collection">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">მთლიანი კოლექცია</span>
+          <h2 data-split>ყველა რეპო ერთ ადგილას</h2>
+          <p>
+            მოძებნე ან გაფილტრე — ნებისმიერ ბარათზე დაწკაპუნება შესაბამის GitHub
+            რეპოზე გადაჰყავს.
+          </p>
+        </div>
+        <div class="controls">
+          <div class="search">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" />
+            </svg>
+            <input
+              id="q"
+              type="search"
+              placeholder="ძებნა — სახელი ან აღწერა…"
+              aria-label="ძებნა"
+              autocomplete="off"
+            />
+          </div>
+          <div
+            class="chips"
+            id="chips"
+            role="group"
+            aria-label="კატეგორიის ფილტრი"
+          ></div>
+        </div>
+        <div class="count-line" id="countLine"></div>
+        <div class="grid" id="grid"></div>
+        <div class="empty" id="empty" hidden>
+          ვერაფერი მოიძებნა — სცადე სხვა საძიებო სიტყვა ან კატეგორია.
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="cta-band reveal">
+        <h2 data-split>დაიწყე ახლავე</h2>
+        <p>
+          დაამატე კოლექცია GitHub-ზე, დააკავშირე MCP server, ან უბრალოდ
+          დაათვალიერე — ყველაფერი უფასოა და ღია კოდია.
+        </p>
+        <div class="cta-row" style="margin-bottom: 0">
+          <a
+            class="btn btn-primary magnetic"
+            href="https://github.com/tornikebolokadze1-cyber/awesome-ai-pulse-georgia"
+            target="_blank"
+            rel="noopener"
+            ><svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="m12 2 2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01z"
+              /></svg
+            >GitHub-ზე Star</a
+          >
+          <a class="btn btn-ghost magnetic" href="#use">MCP / CLI დაყენება</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot">
+          <div>
+            <h4>AI Pulse Georgia</h4>
+            <p>
+              ღია, ხელით შერჩეული AI რეპოზიტორიების კოლექცია ქართული აღწერებით.
+              ხელმისაწვდომია MCP server-ად და
+              <span class="mono">aipulse</span> CLI-ად.
+            </p>
+          </div>
+          <div class="foot-links">
+            <a
+              href="https://github.com/tornikebolokadze1-cyber/awesome-ai-pulse-georgia"
+              target="_blank"
+              rel="noopener"
+              >GitHub რეპო</a
+            >
+            <a
+              href="https://www.npmjs.com/package/@aipulsegeorgia/mcp-server"
+              target="_blank"
+              rel="noopener"
+              >MCP / CLI (npm)</a
+            >
+            <a
+              href="https://github.com/tornikebolokadze1-cyber/awesome-ai-pulse-georgia#readme"
+              target="_blank"
+              rel="noopener"
+              >README</a
+            >
+          </div>
+        </div>
+        <div class="gen" id="gen"></div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+    <script src="./data.js"></script>
+    <script>
+      (function () {
+        var DATA = window.AIPULSE || {
+          categories: [],
+          repos: [],
+          stats: { repos: 0, categories: 0, totalStars: 0 },
+        };
+        var catColor = {},
+          catLabel = {},
+          catEmoji = {};
+        DATA.categories.forEach(function (c) {
+          catColor[c.slug] = c.color;
+          catLabel[c.slug] = c.georgian;
+          catEmoji[c.slug] = c.emoji;
+        });
+        var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var fine = matchMedia("(pointer: fine)").matches;
+
+        function esc(s) {
+          return String(s).replace(/[&<>"]/g, function (m) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[m];
+          });
+        }
+        function md(s) {
+          return esc(s)
+            .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+            .replace(/`([^`]+)`/g, "<code>$1</code>");
+        }
+        function star() {
+          return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01z"/></svg>';
+        }
+        function arrow() {
+          return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+        }
+
+        /* ---------- DATA RENDER ---------- */
+        var active = "all",
+          query = "";
+
+        // categories
+        var catGrid = document.getElementById("catGrid");
+        catGrid.innerHTML = DATA.categories
+          .map(function (c) {
+            return (
+              '<div class="cat-tile reveal" role="button" tabindex="0" data-slug="' +
+              c.slug +
+              '" style="--cc:' +
+              c.color +
+              '">' +
+              '<div class="cat-ic">' +
+              c.emoji +
+              '</div><div><div class="nm">' +
+              esc(c.georgian) +
+              '</div><div class="ct"><b>' +
+              c.count +
+              "</b> რეპო</div></div></div>"
+            );
+          })
+          .join("");
+        function gotoCat(slug) {
+          active = slug;
+          query = "";
+          var qi = document.getElementById("q");
+          if (qi) qi.value = "";
+          render();
+          syncChips();
+          document
+            .getElementById("collection")
+            .scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+        }
+        [].forEach.call(catGrid.children, function (t) {
+          t.addEventListener("click", function () {
+            gotoCat(t.dataset.slug);
+          });
+          t.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              gotoCat(t.dataset.slug);
+            }
+          });
+        });
+
+        // top repos
+        var top = DATA.repos
+          .filter(function (r) {
+            return r.s > 0;
+          })
+          .sort(function (a, b) {
+            return b.s - a.s;
+          })
+          .slice(0, 10);
+        document.getElementById("topGrid").innerHTML = top
+          .map(function (r, i) {
+            var color = catColor[r.cat] || "#fff";
+            return (
+              '<a class="top-card reveal tilt" style="--cc:' +
+              color +
+              '" href="' +
+              esc(r.url) +
+              '" target="_blank" rel="noopener">' +
+              '<span class="rank">' +
+              (i + 1) +
+              '</span><div><div class="nm">' +
+              esc(r.name) +
+              '</div><div class="meta">' +
+              '<span class="st">' +
+              star() +
+              '<span class="mono">' +
+              esc(r.stars) +
+              "</span></span>" +
+              '<span class="cdot"></span><span>' +
+              esc(catLabel[r.cat] || r.cat) +
+              "</span></div></div></a>"
+            );
+          })
+          .join("");
+
+        // marquee
+        var mqItems = top
+          .concat(top)
+          .map(function (r) {
+            return (
+              '<span class="mq-item">' +
+              esc(r.name) +
+              ' <span class="s">★ ' +
+              esc(r.stars) +
+              '</span><span class="dot"></span></span>'
+            );
+          })
+          .join("");
+        document.getElementById("marquee").innerHTML = mqItems;
+
+        // chips
+        var chipsEl = document.getElementById("chips");
+        function buildChips() {
+          chipsEl.innerHTML = "";
+          var all = document.createElement("button");
+          all.className = "chip";
+          all.type = "button";
+          all.dataset.slug = "all";
+          all.style.setProperty("--cc", "#00D0FF");
+          all.setAttribute("aria-pressed", active === "all");
+          all.innerHTML =
+            '<span class="sw"></span><span>ყველა</span><span class="ct">' +
+            DATA.repos.length +
+            "</span>";
+          all.addEventListener("click", function () {
+            active = "all";
+            render();
+            syncChips();
+          });
+          chipsEl.appendChild(all);
+          DATA.categories.forEach(function (c) {
+            var b = document.createElement("button");
+            b.className = "chip";
+            b.type = "button";
+            b.dataset.slug = c.slug;
+            b.style.setProperty("--cc", c.color);
+            b.setAttribute("aria-pressed", active === c.slug);
+            b.innerHTML =
+              '<span class="sw"></span><span>' +
+              esc(c.georgian) +
+              '</span><span class="ct">' +
+              c.count +
+              "</span>";
+            b.addEventListener("click", function () {
+              active = c.slug;
+              render();
+              syncChips();
+            });
+            chipsEl.appendChild(b);
+          });
+        }
+        function syncChips() {
+          [].forEach.call(chipsEl.children, function (c) {
+            c.setAttribute("aria-pressed", c.dataset.slug === active);
+          });
+        }
+
+        // collection cards
+        var gridEl = document.getElementById("grid"),
+          emptyEl = document.getElementById("empty"),
+          countEl = document.getElementById("countLine");
+        function cardHTML(r) {
+          var color = catColor[r.cat] || "#fff";
+          var sb =
+            r.s > 0
+              ? '<span class="stbadge">' +
+                star() +
+                '<span class="mono">' +
+                esc(r.stars) +
+                "</span></span>"
+              : '<span class="stbadge" style="color:#9aa3b8">' +
+                esc(r.stars) +
+                "</span>";
+          var link =
+            '" href="' + esc(r.url) + '" target="_blank" rel="noopener">';
+          return (
+            '<div class="card" style="--cc:' +
+            color +
+            '">' +
+            '<div class="top"><h3><a' +
+            link +
+            esc(r.name) +
+            "</a></h3>" +
+            sb +
+            "</div>" +
+            '<div><span class="cat-tag"><span class="sw"></span>' +
+            esc(catLabel[r.cat] || r.cat) +
+            "</span></div>" +
+            '<p class="desc clamp">' +
+            md(r.d) +
+            "</p>" +
+            '<button class="more" type="button" hidden>ვრცლად</button>' +
+            '<a class="go' +
+            link +
+            "რეპოზე გადასვლა " +
+            arrow() +
+            "</a></div>"
+          );
+        }
+        function wireCards() {
+          [].forEach.call(gridEl.querySelectorAll(".card"), function (c) {
+            var p = c.querySelector(".desc"),
+              m = c.querySelector(".more");
+            if (p && m) {
+              if (p.scrollHeight > p.clientHeight + 2) m.hidden = false;
+              m.addEventListener("click", function () {
+                var cl = p.classList.toggle("clamp");
+                m.textContent = cl ? "ვრცლად" : "ნაკლები";
+              });
+            }
+          });
+        }
+        function render() {
+          var q = query.trim().toLowerCase();
+          var list = DATA.repos.filter(function (r) {
+            if (active !== "all" && r.cat !== active) return false;
+            if (q) {
+              var h = (
+                r.name +
+                " " +
+                r.d +
+                " " +
+                (catLabel[r.cat] || "")
+              ).toLowerCase();
+              if (h.indexOf(q) === -1) return false;
+            }
+            return true;
+          });
+          gridEl.innerHTML = list.map(cardHTML).join("");
+          emptyEl.hidden = list.length > 0;
+          countEl.textContent =
+            list.length + " / " + DATA.repos.length + " რეპოზიტორია";
+          wireCards();
+          if (window.gsap && !reduce) {
+            gsap.from(gridEl.children, {
+              opacity: 0,
+              y: 22,
+              duration: 0.5,
+              stagger: 0.025,
+              ease: "power2.out",
+              overwrite: true,
+            });
+          }
+        }
+        var qEl = document.getElementById("q"),
+          t;
+        qEl.addEventListener("input", function () {
+          clearTimeout(t);
+          t = setTimeout(function () {
+            query = qEl.value;
+            render();
+          }, 120);
+        });
+
+        // copy buttons
+        [].forEach.call(document.querySelectorAll(".copy"), function (b) {
+          b.addEventListener("click", function () {
+            var el = document.getElementById(b.dataset.copy);
+            if (!el) return;
+            try {
+              navigator.clipboard.writeText(el.innerText);
+            } catch (e) {}
+            var old = b.innerHTML;
+            b.innerHTML = "✓ კოპირდა";
+            setTimeout(function () {
+              b.innerHTML = old;
+            }, 1400);
+          });
+        });
+
+        // stats
+        function fmtStars(n) {
+          if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, "") + "M";
+          if (n >= 1e3) return Math.round(n / 1e3) + "K";
+          return "" + n;
+        }
+        function countUp(el, to) {
+          if (reduce) {
+            el.textContent = to.toLocaleString();
+            return;
+          }
+          var dur = 1300,
+            t0 = null;
+          function s(ts) {
+            if (!t0) t0 = ts;
+            var p = Math.min((ts - t0) / dur, 1);
+            el.textContent = Math.round(
+              (1 - Math.pow(1 - p, 3)) * to,
+            ).toLocaleString();
+            if (p < 1) requestAnimationFrame(s);
+          }
+          requestAnimationFrame(s);
+        }
+        var nums = document.querySelectorAll(".num[data-count]");
+        countUp(nums[0], DATA.stats.repos);
+        countUp(nums[1], DATA.stats.categories);
+        document.getElementById("starStat").textContent =
+          "~" + fmtStars(DATA.stats.totalStars) + "+";
+        try {
+          document.getElementById("gen").textContent =
+            "სტარები ბოლოს განახლდა " +
+            new Date(DATA.generated).toISOString().slice(0, 10) +
+            " · მონაცემები ავტომატურად სინქრონდება GitHub-თან";
+        } catch (e) {}
+
+        buildChips();
+        render();
+
+        /* ---------- MOTION ---------- */
+        // grapheme/word-safe split (Georgian) into mask-revealable words
+        function splitWords(el) {
+          var text = el.textContent;
+          el.setAttribute("aria-label", text);
+          el.textContent = "";
+          text.split(" ").forEach(function (w, i, arr) {
+            var wrap = document.createElement("span");
+            wrap.className = "word-wrap";
+            wrap.setAttribute("aria-hidden", "true");
+            var inner = document.createElement("span");
+            inner.textContent = w;
+            inner.style.setProperty("--i", i);
+            wrap.appendChild(inner);
+            el.appendChild(wrap);
+            if (i < arr.length - 1)
+              el.appendChild(document.createTextNode(" "));
+          });
+          return el.querySelectorAll(".word-wrap > span");
+        }
+
+        // starfield (lightweight)
+        (function () {
+          if (reduce) return;
+          var cv = document.getElementById("stars"),
+            x = cv.getContext("2d"),
+            W,
+            H,
+            P = [];
+          function rs() {
+            var d = Math.min(devicePixelRatio || 1, 2);
+            W = cv.width = innerWidth * d;
+            H = cv.height = innerHeight * d;
+            cv.style.width = innerWidth + "px";
+            cv.style.height = innerHeight + "px";
+          }
+          rs();
+          addEventListener("resize", rs, { passive: true });
+          for (var i = 0; i < 90; i++)
+            P.push({
+              x: Math.random(),
+              y: Math.random(),
+              r: Math.random() * 1.3 + 0.3,
+              vy: Math.random() * 0.00025 + 0.00006,
+              a: Math.random() * 0.5 + 0.25,
+            });
+          var run = true;
+          document.addEventListener("visibilitychange", function () {
+            run = !document.hidden;
+            if (run) loop();
+          });
+          function loop() {
+            if (!run) return;
+            x.clearRect(0, 0, W, H);
+            for (var i = 0; i < P.length; i++) {
+              var p = P[i];
+              p.y += p.vy;
+              if (p.y > 1) p.y = 0;
+              x.globalAlpha = p.a;
+              x.fillStyle = "#bcd0ff";
+              x.beginPath();
+              x.arc(p.x * W, p.y * H, p.r * (devicePixelRatio || 1), 0, 6.283);
+              x.fill();
+            }
+            x.globalAlpha = 1;
+            requestAnimationFrame(loop);
+          }
+          loop();
+        })();
+
+        // cursor glow
+        if (fine && !reduce) {
+          var glow = document.querySelector(".cursor-glow"),
+            mx = innerWidth / 2,
+            my = innerHeight / 2,
+            gx = mx,
+            gy = my,
+            shown = false;
+          addEventListener(
+            "pointermove",
+            function (e) {
+              mx = e.clientX;
+              my = e.clientY;
+              if (!shown) {
+                shown = true;
+                glow.style.opacity = 1;
+              }
+            },
+            { passive: true },
+          );
+          (function gl() {
+            gx += (mx - gx) * 0.12;
+            gy += (my - gy) * 0.12;
+            glow.style.transform = "translate3d(" + gx + "px," + gy + "px,0)";
+            requestAnimationFrame(gl);
+          })();
+        }
+
+        // magnetic buttons
+        if (fine && !reduce) {
+          [].forEach.call(
+            document.querySelectorAll(".magnetic"),
+            function (el) {
+              el.style.transition = "transform .25s cubic-bezier(.2,.8,.2,1)";
+              el.addEventListener("pointermove", function (e) {
+                var r = el.getBoundingClientRect();
+                el.style.transform =
+                  "translate3d(" +
+                  (e.clientX - (r.left + r.width / 2)) * 0.28 +
+                  "px," +
+                  (e.clientY - (r.top + r.height / 2)) * 0.4 +
+                  "px,0)";
+              });
+              el.addEventListener("pointerleave", function () {
+                el.style.transform = "translate3d(0,0,0)";
+              });
+            },
+          );
+        }
+
+        // bento spotlight (features, categories, top)
+        if (fine) {
+          [].forEach.call(
+            document.querySelectorAll(".feat,.cat-tile,.top-card"),
+            function (el) {
+              el.addEventListener(
+                "pointermove",
+                function (e) {
+                  var r = el.getBoundingClientRect();
+                  el.style.setProperty("--mx", e.clientX - r.left + "px");
+                  el.style.setProperty("--my", e.clientY - r.top + "px");
+                },
+                { passive: true },
+              );
+            },
+          );
+        }
+
+        // 3D tilt
+        if (fine && !reduce) {
+          [].forEach.call(document.querySelectorAll(".tilt"), function (card) {
+            var M = 7;
+            card.addEventListener("pointermove", function (e) {
+              var r = card.getBoundingClientRect();
+              var rx = -((e.clientY - r.top) / r.height - 0.5) * 2 * M,
+                ry = ((e.clientX - r.left) / r.width - 0.5) * 2 * M;
+              card.style.transform =
+                "perspective(800px) rotateX(" +
+                rx +
+                "deg) rotateY(" +
+                ry +
+                "deg)";
+            });
+            card.addEventListener("pointerleave", function () {
+              card.style.transform = "perspective(800px) rotateX(0) rotateY(0)";
+              card.style.transition = "transform .4s ease";
+            });
+            card.addEventListener("pointerenter", function () {
+              card.style.transition = "transform .1s ease";
+            });
+          });
+        }
+
+        // GSAP scroll choreography
+        if (window.gsap && window.ScrollTrigger) {
+          gsap.registerPlugin(ScrollTrigger);
+          if (!reduce) {
+            // Lenis smooth scroll
+            if (window.Lenis) {
+              var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+              lenis.on("scroll", ScrollTrigger.update);
+              gsap.ticker.add(function (time) {
+                lenis.raf(time * 1000);
+              });
+              gsap.ticker.lagSmoothing(0);
+            }
+            // progress bar
+            gsap.to(".progress", {
+              scaleX: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: document.body,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 0.3,
+              },
+            });
+            // hero entrance choreography
+            var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+            tl.from("[data-enter]", {
+              opacity: 0,
+              y: 18,
+              duration: 0.7,
+              stagger: 0.12,
+              delay: 0.1,
+            });
+            // kinetic headline reveal — CSS-transition driven (.in toggles the
+            // word rise). Hero plays on load; section headings on scroll-in.
+            [].forEach.call(
+              document.querySelectorAll("[data-split]"),
+              function (el) {
+                splitWords(el);
+                if (el.closest(".hero")) {
+                  requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
+                      el.classList.add("in");
+                    });
+                  });
+                } else {
+                  ScrollTrigger.create({
+                    trigger: el,
+                    start: "top 85%",
+                    once: true,
+                    onEnter: function () {
+                      el.classList.add("in");
+                    },
+                  });
+                }
+              },
+            );
+            // section + card reveals (batch)
+            ScrollTrigger.batch(".reveal", {
+              start: "top 88%",
+              once: true,
+              onEnter: function (els) {
+                gsap.to(els, {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.7,
+                  stagger: 0.1,
+                  ease: "power3.out",
+                  overwrite: true,
+                });
+              },
+            });
+            // refresh after fonts/images settle
+            window.addEventListener("load", function () {
+              ScrollTrigger.refresh();
+            });
+          } else {
+            // reduced motion: ensure everything visible
+            gsap.set(".reveal", { opacity: 1, y: 0 });
+          }
+        }
+        // Safety: if the animation libraries failed to load (e.g. offline CDN),
+        // never leave content hidden — drop the .anim gate and reveal everything.
+        if (!(window.gsap && window.ScrollTrigger)) {
+          document.documentElement.classList.remove("anim");
+          [].forEach.call(
+            document.querySelectorAll(".reveal,[data-enter]"),
+            function (el) {
+              el.style.opacity = 1;
+              el.style.transform = "none";
+            },
+          );
+        }
+      })();
+    </script>
+  </body>
+</html>
